@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>  
+    <script src="{{ url_for('static', filename='index.js') }}"></script> 
+    <title>Document</title>
+</head>
+<body>
+    <input id="kakao_id" value="opi6@hanmail.net"></input>
+    <input id="kakao_password" value=""></input>
+    <button id="login_button" onclick="init();">
+        이닛팅
+    </button>
+    <input id="chrome_index"></input>
+    <button id="confirm_login" onclick="confirm_login();">확인</button>
+    <button onclick="logout();">앱에서 로그아웃</button>
+
+    <input id="naver_index"></input>
+    <button onclick="open_naver();">확인</button>
+    <button onclick="close_naver();">앱에서 로그아웃</button>
+</body> 
+</html>
