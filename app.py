@@ -96,7 +96,7 @@ def create_app():
         
     @app.route('/isChromeOpen')
     def isChromeOpen():
-        global chromeOPen
+        global chromeOpen
         if chromeOpen:
             print("크롬이 켜져있어요")
             app.logger.info("크롬이 켜져있어요")
@@ -229,33 +229,37 @@ def create_app():
             except NoSuchElementException:
                 print("공부 끝 버튼을 찾지 못함")
                 app.logger.info("공부 끝 버튼을 찾지 못함")
-        
-        @scheduler.scheduled_job('interval', seconds=1200, id='test_3')
-        def refresh(): 
-            global global_token
-            global driver
-            app.logger.info("새로고침합니다.")
-            app.logger.info("토큰 : " + global_token)
-            print("새로고침 시작")
-            print(global_token)
-            print(driver)
-            try:
-                start_study_button = driver.find_element(By.XPATH, "//span[contains(text(), '학습 시작')]")
-                app.logger.info(start_study_button.text + "버튼이 있어요")
-            except NoSuchElementException:
-                app.logger.info("공부 시작 버튼이 없어요")
-                driver.get('https://hanghae99.spartacodingclub.kr/v2/attendance')
-            try:
-                end_study_button = driver.find_element(By.XPATH, "//span[contains(text(), '학습 종료')]")
-                app.logger.info(end_study_button.text + "버튼이 있어요")
-            except NoSuchElementException:
-                app.logger.info("공부끝 버튼이 없어요")
-                driver.get('https://hanghae99.spartacodingclub.kr/v2/attendance')
-            app.logger.info("무사히 탐색을 마쳤어요")
-            driver.refresh()
                
         scheduler.start()
         return "yes"
+    
+    @app.route("/refreshChrome")
+    def refreshChrome():
+        global global_token
+        global driver
+        app.logger.info("새로고침합니다.")
+        app.logger.info("토큰 : " + global_token)
+        print("새로고침 시작")
+        print(global_token)
+        driver.refresh()
+        start_button = 0
+        end_button = 0
+        try:
+            start_study_button = driver.find_element(By.XPATH, "//span[contains(text(), '학습 시작')]")
+            app.logger.info(start_study_button.text + "버튼이 있어요")
+            start_button = 1
+        except NoSuchElementException:
+            app.logger.info("공부 시작 버튼이 없어요")
+            driver.get('https://hanghae99.spartacodingclub.kr/v2/attendance')
+        try:
+            end_study_button = driver.find_element(By.XPATH, "//span[contains(text(), '학습 종료')]")
+            app.logger.info(end_study_button.text + "버튼이 있어요")
+            end_button = 1
+        except NoSuchElementException:
+            app.logger.info("공부끝 버튼이 없어요")
+            driver.get('https://hanghae99.spartacodingclub.kr/v2/attendance')
+        app.logger.info("무사히 탐색을 마쳤어요")
+        return str(start_button+end_button)
     
     @app.route("/checkToken")
     def checkToken():
