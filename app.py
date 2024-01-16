@@ -230,7 +230,7 @@ def create_app():
                 print("공부 끝 버튼을 찾지 못함")
                 app.logger.info("공부 끝 버튼을 찾지 못함")
         
-        @scheduler.scheduled_job('interval', seconds=60, id='test_3')
+        @scheduler.scheduled_job('interval', seconds=1200, id='test_3')
         def refresh(): 
             global global_token
             global driver
