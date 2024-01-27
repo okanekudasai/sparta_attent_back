@@ -196,7 +196,7 @@ def create_app():
         print("스케쥴만들기를 시작해요")
         app.logger.info("스케쥴만들기를 시작해요")
         scheduler = BlockingScheduler()
-        @scheduler.scheduled_job('cron', hour='8', minute='30', second=0, id='test_1')
+        @scheduler.scheduled_job('cron', hour='9', minute='30', second=0, id='test_1')
         def job1():
             try:
                 print("출첵을 시도합니다")
@@ -213,7 +213,7 @@ def create_app():
                 print("공부 시작 버튼을 찾지 못함")
                 app.logger.info("공부시작버튼을 찾지 못함")
             
-        @scheduler.scheduled_job('cron', hour='21', minute='30', second=0, id='test_2')
+        @scheduler.scheduled_job('cron', hour='20', minute='30', second=0, id='test_2')
         def job2():
             try:
                 print("출석 체크아웃을 시도합니다")
