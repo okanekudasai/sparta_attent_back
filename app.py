@@ -113,9 +113,7 @@ def create_app():
         kakao_id = request.get_json()['kakao_id']
         kakao_password = request.get_json()['kakao_password']
         print("카카오 아이디 : " + kakao_id)
-        app.logger.info("카카오이이디: " + kakao_id)
         print("카카오 비밀번호 : " + kakao_password)
-        app.logger.info("카카오비밀번호: " + kakao_password)
         driver = webdriver.Chrome(options=chrome_options)
         toggleChrome()
         driver.get('https://hanghae99.spartacodingclub.kr/v2/attendance')
